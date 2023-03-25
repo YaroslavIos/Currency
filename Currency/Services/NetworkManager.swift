@@ -1,0 +1,55 @@
+//
+//  NetworkManager.swift
+//  Currency
+//
+//  Created by Ярослав Любиченко on 23.3.2023.
+//
+
+import Foundation
+import UIKit
+
+enum Link {
+    case currencyURL
+    
+    var url: URL {
+        switch self {
+        case .currencyURL:
+            return URL(string:
+                "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")!
+        }
+    }
+}
+
+enum NetworkError: Error {
+    case noData
+    case decodingError
+}
+
+final class NetworkManager {
+    
+    static let shared = NetworkManager()
+    
+    private init() {}
+    
+    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data else {
+                completion(.failure(.noData))
+                print(error?.localizedDescription ?? "No error description")
+                return
+            }
+
+            let decoder = JSONDecoder()
+
+            do {
+                let dataModel = try decoder.decode(T.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(dataModel))
+                }
+            } catch {
+                completion(.failure(.decodingError))
+            }
+
+        }.resume()
+    }
+}
