@@ -38,9 +38,9 @@ final class NetworkManager {
                 print(error?.localizedDescription ?? "No error description")
                 return
             }
-
+            
             let decoder = JSONDecoder()
-
+            
             do {
                 let dataModel = try decoder.decode(T.self, from: data)
                 DispatchQueue.main.async {
@@ -49,7 +49,19 @@ final class NetworkManager {
             } catch {
                 completion(.failure(.decodingError))
             }
-
+            
         }.resume()
+    }
+    
+    func fetchImage(from url: URL, completion: @escaping(Result<Data, NetworkError>) -> Void) {
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: url) else {
+                completion(.failure(.noData))
+                return
+            }
+            DispatchQueue.main.async {
+                completion(.success(imageData))
+            }
+        }
     }
 }
