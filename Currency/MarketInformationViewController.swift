@@ -39,10 +39,10 @@ final class MarketInformationViewController: UIViewController {
 // MARK:- Networking
 extension MarketInformationViewController {
     func fetchCurrencyImage() {
-        networkManager.fetchImage(from: currency.image) { result in
+        networkManager.fetchImage(from: currency.image) { [weak self] result in
             switch result {
             case .success(let imageData):
-                self.currencyImage.image = UIImage(data: imageData)
+                self?.currencyImage.image = UIImage(data: imageData)
             case .failure(let error):
                 print(error)
             }
