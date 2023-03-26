@@ -9,6 +9,7 @@ import UIKit
 
 class CurrencyViewController: UITableViewController {
     
+    private let networkManager = NetworkManager.shared
     private var currencies: [Currency] = []
     
     override func viewDidLoad() {
@@ -51,22 +52,14 @@ extension CurrencyViewController {
 extension CurrencyViewController {
     
     private func fetchCurrency() {
-        URLSession.shared.dataTask(with: Link.currencyURL.url) { [weak self] data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
+        networkManager.fetch([Currency].self, from: Link.currencyURL.url) { [weak self] result in
+            switch result {
+            case .success(let currencies):
+                self?.currencies = currencies
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
             }
-
-            do {
-                let decoder = JSONDecoder()
-
-                self?.currencies = try decoder.decode([Currency].self, from: data)
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }.resume()
+        }
     }
 }
