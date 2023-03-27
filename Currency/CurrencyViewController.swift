@@ -16,7 +16,18 @@ class CurrencyViewController: UITableViewController {
         super.viewDidLoad()
         tableView.rowHeight = 80
         
-        fetchCurrency()
+    }
+    
+    private func fetchHandlingCurrency() {
+        networkManager.fetchCurrencies(from: Link.currencyURL.url) { [weak self] result in
+            switch result {
+            case .success(let currencies):
+                self?.currencies = currencies
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -49,17 +60,17 @@ extension CurrencyViewController {
 }
 
 //MARK: - Networking
-extension CurrencyViewController {
-    
-    private func fetchCurrency() {
-        networkManager.fetch([Currency].self, from: Link.currencyURL.url) { [weak self] result in
-            switch result {
-            case .success(let currencies):
-                self?.currencies = currencies
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
+//extension CurrencyViewController {
+//
+//    private func fetchCurrency() {
+//        networkManager.fetch([Currency].self, from: Link.currencyURL.url) { [weak self] result in
+//            switch result {
+//            case .success(let currencies):
+//                self?.currencies = currencies
+//                self?.tableView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+//}
