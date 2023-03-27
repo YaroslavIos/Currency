@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import Alamofire
 
 enum Link {
     case currencyURL
@@ -30,6 +30,20 @@ final class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
+    
+    func fetchCurrencies(from url: URL, completion: @escaping(Result<[Currency], AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let currencies = Currency.getCurrency(from: value)
+                    completion(.success(currencies))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
     
     func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: url) { data, _, error in
