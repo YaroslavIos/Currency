@@ -11,7 +11,7 @@ struct Currency: Codable {
     let id: String
     let symbol: String
     let name: String
-    let image: URL
+    let image: String
     let currentPrice: Double
     let priceChange: Double
     let priceChangePercentage: Double
@@ -20,7 +20,7 @@ struct Currency: Codable {
     init(id: String,
          symbol: String,
          name: String,
-         image: URL,
+         image: String,
          currentPrice: Double,
          priceChange: Double,
          priceChangePercentage: Double,
@@ -40,10 +40,10 @@ struct Currency: Codable {
     id = currencyDatum["id"] as? String ?? ""
     symbol = currencyDatum["symbol"] as? String ?? ""
     name = currencyDatum["name"] as? String ?? ""
-    image = currencyDatum["image"] as? URL ?? URL(string: "")!
+    image = currencyDatum["image"] as? String ?? ""
     currentPrice = currencyDatum["current_price"] as? Double ?? 0
     priceChange = currencyDatum["price_change_24h"] as? Double ?? 0
-    priceChangePercentage = currencyDatum["rice_change_percentage_24h"] as? Double ?? 0
+    priceChangePercentage = currencyDatum["price_change_percentage_24h"] as? Double ?? 0
     lastUpdate = currencyDatum["last_updated"] as? String ?? ""
     }
     
