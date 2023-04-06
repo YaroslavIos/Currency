@@ -142,10 +142,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMQ-qB-Mhd">
-                                <rect key="frame" x="16" y="390" width="288" height="139"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kXL-RX-SPT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -156,7 +152,6 @@
                             <constraint firstItem="Noa-0k-fhB" firstAttribute="leading" secondItem="kXL-RX-SPT" secondAttribute="leading" constant="16" id="AVV-T9-KU5"/>
                             <constraint firstItem="Noa-0k-fhB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kXL-RX-SPT" secondAttribute="leading" symbolic="YES" id="FLL-ER-H6j"/>
                             <constraint firstItem="P4r-kY-15h" firstAttribute="top" secondItem="RLw-oK-I1b" secondAttribute="bottom" constant="10" id="GTu-eM-5Qp"/>
-                            <constraint firstItem="wMQ-qB-Mhd" firstAttribute="leading" secondItem="kXL-RX-SPT" secondAttribute="leading" constant="16" id="GzJ-oe-DTr"/>
                             <constraint firstItem="aZZ-gI-Vi0" firstAttribute="top" secondItem="Noa-0k-fhB" secondAttribute="bottom" constant="10" id="H5X-Tj-PZC"/>
                             <constraint firstItem="sbM-a7-Tah" firstAttribute="leading" secondItem="FAK-aC-Yei" secondAttribute="trailing" constant="10" id="JKd-0t-IeU"/>
                             <constraint firstItem="P4r-kY-15h" firstAttribute="top" secondItem="RLw-oK-I1b" secondAttribute="bottom" constant="10" id="KDh-zo-Oe0"/>
@@ -166,9 +161,7 @@
                             <constraint firstItem="kXL-RX-SPT" firstAttribute="trailing" secondItem="Gja-kl-KIU" secondAttribute="trailing" constant="16" id="Xfi-aV-TOo"/>
                             <constraint firstItem="sbM-a7-Tah" firstAttribute="baseline" secondItem="FAK-aC-Yei" secondAttribute="baseline" id="Xrt-De-lim"/>
                             <constraint firstItem="DhJ-rX-7Ck" firstAttribute="leading" secondItem="kXL-RX-SPT" secondAttribute="leading" constant="16" id="bjc-zE-bV0"/>
-                            <constraint firstItem="wMQ-qB-Mhd" firstAttribute="top" secondItem="aZZ-gI-Vi0" secondAttribute="bottom" constant="20" id="dRf-Gd-CON"/>
                             <constraint firstItem="aZZ-gI-Vi0" firstAttribute="baseline" secondItem="P4r-kY-15h" secondAttribute="baseline" id="esh-46-J2j"/>
-                            <constraint firstItem="kXL-RX-SPT" firstAttribute="trailing" secondItem="wMQ-qB-Mhd" secondAttribute="trailing" constant="16" id="fAN-Qt-h0j"/>
                             <constraint firstItem="H7i-Hs-NSI" firstAttribute="centerX" secondItem="2ad-OU-GNf" secondAttribute="centerX" id="fyp-XG-paH"/>
                             <constraint firstItem="FAK-aC-Yei" firstAttribute="top" secondItem="Gja-kl-KIU" secondAttribute="bottom" constant="10" id="h2f-jP-BHk"/>
                             <constraint firstItem="P4r-kY-15h" firstAttribute="leading" secondItem="aZZ-gI-Vi0" secondAttribute="trailing" constant="10" id="hU3-Ut-eDB"/>
@@ -177,7 +170,6 @@
                             <constraint firstItem="Gja-kl-KIU" firstAttribute="leading" secondItem="DhJ-rX-7Ck" secondAttribute="trailing" constant="10" id="lIY-8e-pgM"/>
                             <constraint firstItem="kXL-RX-SPT" firstAttribute="trailing" secondItem="P4r-kY-15h" secondAttribute="trailing" constant="16" id="mtd-xI-gpf"/>
                             <constraint firstItem="H7i-Hs-NSI" firstAttribute="top" secondItem="kXL-RX-SPT" secondAttribute="top" constant="10" id="nPr-H6-HzV"/>
-                            <constraint firstItem="kXL-RX-SPT" firstAttribute="bottom" secondItem="wMQ-qB-Mhd" secondAttribute="bottom" constant="39" id="rBz-NN-6YY"/>
                             <constraint firstItem="sbM-a7-Tah" firstAttribute="top" secondItem="Gja-kl-KIU" secondAttribute="bottom" constant="10" id="rEQ-Ha-aAo"/>
                             <constraint firstItem="kXL-RX-SPT" firstAttribute="trailing" secondItem="sbM-a7-Tah" secondAttribute="trailing" constant="16" id="rSm-TV-S4B"/>
                             <constraint firstItem="Noa-0k-fhB" firstAttribute="leading" secondItem="kXL-RX-SPT" secondAttribute="leading" constant="16" id="uMG-Sz-GCr"/>
@@ -187,7 +179,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="erA-5y-TBd"/>
                     <connections>
-                        <outlet property="chartDataView" destination="wMQ-qB-Mhd" id="uAF-YY-tlS"/>
                         <outlet property="currencyImage" destination="H7i-Hs-NSI" id="n2c-cL-NaT"/>
                         <outlet property="currentPriceLabel" destination="Gja-kl-KIU" id="fEr-hQ-IoV"/>
                         <outlet property="lastUpdateLabel" destination="P4r-kY-15h" id="rRz-uy-ChY"/>
