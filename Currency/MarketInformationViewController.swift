@@ -25,9 +25,11 @@ final class MarketInformationViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var chartDataView: UIView!
+    
     private let networkManager = NetworkManager.shared
     var currency: Currency!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +48,7 @@ final class MarketInformationViewController: UIViewController {
     }
     
     func setColorForPrice() {
-        if currency.priceChange  > 0 {
+        if currency.priceChange > 0 {
             priceChangedLabel.textColor = .systemGreen
         } else {
             priceChangedLabel.textColor = .red
@@ -62,16 +64,16 @@ final class MarketInformationViewController: UIViewController {
     }
 }
 
-// MARK: - Networking
-extension MarketInformationViewController {
-    func fetchImage() {
-        networkManager.fetchImageData(from: currency.image) { [weak self] result in
-            switch result {
-            case .success(let imageData):
-                self?.currencyImage.image = UIImage(data: imageData)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
+ // MARK: - Networking
+ extension MarketInformationViewController {
+     func fetchImage() {
+         networkManager.fetchImageData(from: currency.image) { [weak self] result in
+             switch result {
+             case .success(let imageData):
+                 self?.currencyImage.image = UIImage(data: imageData)
+             case .failure(let error):
+                 print(error)
+             }
+         }
+     }
+ }
