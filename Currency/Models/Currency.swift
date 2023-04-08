@@ -33,16 +33,3 @@ struct Currency {
         return currencyData.map { Currency(currencyDatum: $0)}
     }
 }
-
-//extension Currency {
-//    enum CodingKeys: String, CodingKey {
-//        case id = "id"
-//        case symbol = "symbol"
-//        case name = "name"
-//        case image = "image"
-//        case currentPrice = "current_price"
-//        case priceChange = "price_change_24h"
-//        case priceChangePercentage = "price_change_percentage_24h"
-//        case lastUpdate = "last_updated"
-//    }
-//}

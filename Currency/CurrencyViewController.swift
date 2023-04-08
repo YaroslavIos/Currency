@@ -17,6 +17,8 @@ class CurrencyViewController: UITableViewController {
         tableView.rowHeight = 80
         
         fetchHandlingCurrency()
+        downloadData()
+        setupRefreshControl()
     }
     
     private func fetchHandlingCurrency() {
@@ -28,6 +30,15 @@ class CurrencyViewController: UITableViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            guard let marketVC = segue.destination as? MarketInformationViewController else { return }
+            marketVC.currency = currencies[indexPath.row]
         }
     }
 }
@@ -49,13 +60,32 @@ extension CurrencyViewController {
         cell.contentConfiguration = content
         return cell
     }
-    
-// MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            guard let marketVC = segue.destination as? MarketInformationViewController else { return }
-            marketVC.currency = currencies[indexPath.row]
+}
+
+// MARK: - Private Methods
+extension CurrencyViewController {
+    private func downloadData() {
+        networkManager.fetchCurrencies(from: Link.currencyURL.url) { [weak self] result in
+            switch result {
+            case .success(let currencies):
+                self?.currencies = currencies
+                self?.tableView.reloadData()
+                if self?.refreshControl != nil {
+                    self?.refreshControl?.endRefreshing()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+//        refreshControl?.addTarget(self, action: #selector(downloadData), for: .valueChanged)
+        let refreshAction = UIAction { [weak self] _ in
+            self?.downloadData()
+        }
+        refreshControl?.addAction(refreshAction, for: .valueChanged)
     }
 }
